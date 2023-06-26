@@ -1,0 +1,80 @@
+<!DOCTYPE HTML>
+<html>
+ <head>
+  <meta charset="utf-8">
+  <title>Интерактивные таблицы</title>
+    <style>
+  img{
+  margin: 3px;
+  }
+  </style>
+ </head>
+ <body>  
+  <table width="100%" border="1" cellspacing="0" cellpadding="4">
+   <caption>Таблица 3.2. Соцсети</caption>  
+   <tr> 
+    <th>&nbsp;</th><th>Чебурашка</th>
+    <th>Крокодил Гена</th><th>Шапокляк</th>
+   </tr>
+   <tr> 
+    <td>Использовал, пнд.</td>
+	<td><span class="dynamic"><img src="ok.png"><img src="facebook.png"><img src="twitter.png"><img src="vk.png"></span></td>
+	<td><span class="dynamic"><img src="ok.png"><img src="facebook.png"><img src="twitter.png"><img src="vk.png"></span></td>
+	<td><span class="dynamic"><img src="ok.png"><img src="facebook.png"><img src="twitter.png"><img src="vk.png"></span></td>
+	
+   </tr>
+   <tr> 
+    <td>Использовал, вторник.</td>
+	<td><span class="dynamic"><img src="ok.png"><img src="facebook.png"><img src="twitter.png"><img src="vk.png"></span></td>
+	<td><span class="dynamic"><img src="ok.png"><img src="facebook.png"><img src="twitter.png"><img src="vk.png"></span></td>
+	<td><span class="dynamic"><img src="ok.png"><img src="facebook.png"><img src="twitter.png"><img src="vk.png"></span></td>
+   </tr>
+   <tr> 
+    <td>Использовал, среда</td>
+	<td><span class="dynamic"><img src="ok.png"><img src="facebook.png"><img src="twitter.png"><img src="vk.png"></span></td>
+	<td><span class="dynamic"><img src="ok.png"><img src="facebook.png"><img src="twitter.png"><img src="vk.png"></span></td>
+	<td><span class="dynamic"><img src="ok.png"><img src="facebook.png"><img src="twitter.png"><img src="vk.png"></span></td>
+   </tr>
+  </table>
+ </body>
+</html>
+
+
+
+
+<script>
+
+var elems = document.getElementsByClassName("dynamic"),
+ trampInput = document.createElement("input");
+ istdselect = false;
+            trampInput.type = "text";
+            trampInput.style.width = "128px";
+            trampInput.addEventListener("blur", function() {
+				let innerText = trampInput.value;
+				innerText = innerText.replace( /О/gi, "<img src=\"ok.png\">" );
+				innerText = innerText.replace( /Ф/gi, "<img src=\"facebook.png\">" );
+				innerText = innerText.replace( /Т/gi, "<img src=\"twitter.png\">" );		
+				innerText = innerText.replace( /К/gi, "<img src=\"vk.png\">" );
+				trampInput.parentNode.innerHTML = innerText;
+				istdselect = false;	
+			}
+            , false);
+for (var i=0; i<elems.length; i++) {
+    var el = elems[i];
+    el.addEventListener("click", function() {
+        if (istdselect) return;
+		istdselect = true;
+		let innerText = this.innerHTML;
+		innerText = innerText.replace( /<img src=\"ok.png\">/gi, "О" );
+		innerText = innerText.replace( /<img src=\"facebook.png\">/gi, "Ф" );
+		innerText = innerText.replace( /<img src=\"twitter.png\">/gi, "Т" );
+		innerText = innerText.replace( /<img src=\"vk.png\">/gi, "К" );		
+        trampInput.value = innerText;
+        this.innerHTML = "";
+        this.appendChild(trampInput);
+        trampInput.focus();
+        trampInput.select()
+		}.bind(el), false);
+	};
+	
+</script>
